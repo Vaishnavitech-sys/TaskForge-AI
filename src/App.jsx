@@ -6,6 +6,7 @@ function App() {
   const [task, setTask] = useState("");
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState("");
+  const [summaryProject, setSummaryProject] = useState("");
 
   // AI Task Generator
   const generateTasks = async () => {
@@ -65,7 +66,7 @@ function App() {
 
   // AI Project Summary
   const projectSummary = async () => {
-    if (!project) return;
+    if (!summaryProject) return;
 
     setLoading(true);
     setResult("");
@@ -97,8 +98,8 @@ function App() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            project,
-            tasks,
+          project: summaryProject,
+          tasks,
           }),
         }
       );
@@ -228,8 +229,8 @@ function App() {
 
             <textarea
               placeholder="Enter your project name"
-              value={project}
-              onChange={(e) => setProject(e.target.value)}
+              value={summaryProject}
+              onChange={(e) => setSummaryProject(e.target.value)}
             />
 
             <button onClick={projectSummary}>
